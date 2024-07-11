@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ChatGPT Assistant</title>
+</head>
+<body>
+    <h1>ChatGPT Assistant</h1>
+    <textarea id="question" placeholder="Enter your question here"></textarea>
+    <button onclick="askChatGPT()">Ask</button>
+    <p id="response"></p>
+
+    <script>
+        async function askChatGPT() {
+            const question = document.getElementById('question').value;
+            const response = await fetch('http://127.0.0.1:5000', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: question })
+            });
+            const data = await response.json();
+            document.getElementById('response').innerText = data;
+        }
+    </script>
+</body>
+</html>
